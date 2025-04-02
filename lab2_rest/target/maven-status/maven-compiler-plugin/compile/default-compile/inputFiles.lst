@@ -1,0 +1,8 @@
+/home/yusuf/distributed/lab2_rest/src/main/java/be/kuleuven/foodrestservice/domain/MealsRepository.java
+/home/yusuf/distributed/lab2_rest/src/main/java/be/kuleuven/foodrestservice/exceptions/MealNotFoundAdvice.java
+/home/yusuf/distributed/lab2_rest/src/main/java/be/kuleuven/foodrestservice/domain/Meal.java
+/home/yusuf/distributed/lab2_rest/src/main/java/be/kuleuven/foodrestservice/FoodRestServiceApplication.java
+/home/yusuf/distributed/lab2_rest/src/main/java/be/kuleuven/foodrestservice/controllers/MealsRestController.java
+/home/yusuf/distributed/lab2_rest/src/main/java/be/kuleuven/foodrestservice/domain/MealType.java
+/home/yusuf/distributed/lab2_rest/src/main/java/be/kuleuven/foodrestservice/exceptions/MealNotFoundException.java
+/home/yusuf/distributed/lab2_rest/src/main/java/be/kuleuven/foodrestservice/controllers/MealsRestRpcStyleController.java
