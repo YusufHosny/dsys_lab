@@ -1,1 +1,6 @@
 startcode/
+.idea/
+*.class
+*.zip
+bin/
+out/

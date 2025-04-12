@@ -26,7 +26,8 @@ public class BookingClient extends AbstractScriptedSimpleTest {
 		try {
 			//Look up the registered remote instance
 			Thread.sleep(1000);
-			bm = (IBookingManager) LocateRegistry.getRegistry().lookup("BookingManager");
+			String host = "baldteo.westeurope.cloudapp.azure.com";
+			bm = (IBookingManager) LocateRegistry.getRegistry(host, 1099).lookup("BookingManager");
 		} catch (Exception exp) {
 			exp.printStackTrace();
 		}
