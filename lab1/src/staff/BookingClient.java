@@ -15,18 +15,16 @@ public class BookingClient extends AbstractScriptedStressTest {
 	private IBookingManager bm = null;
 
 	public static void main(String[] args) throws Exception {
-		BookingClient client = new BookingClient();
+		BookingClient client = new BookingClient(args[2]);
 		client.run(Integer.parseInt(args[1]));
 	}
 
 	/***************
 	 * CONSTRUCTOR *
 	 ***************/
-	public BookingClient() {
+	public BookingClient(String host) {
 		try {
-			//Look up the registered remote instance
 			Thread.sleep(1000);
-			String host = "baldteo.westeurope.cloudapp.azure.com";
 			bm = (IBookingManager) LocateRegistry.getRegistry(host, 1099).lookup("BookingManager");
 		} catch (Exception exp) {
 			exp.printStackTrace();
