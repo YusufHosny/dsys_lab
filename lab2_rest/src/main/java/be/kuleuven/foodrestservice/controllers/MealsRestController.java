@@ -7,9 +7,7 @@ import be.kuleuven.foodrestservice.domain.OrderConfirmation;
 import be.kuleuven.foodrestservice.exceptions.MealNotFoundException;
 import be.kuleuven.foodrestservice.exceptions.OrderFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,8 +82,11 @@ public class MealsRestController {
     @GetMapping("/rest/sampleorder")
     EntityModel<Order> getSampleOrder() {
         Order o = new Order();
+        o.getOrderItems().put("4237681a-441f-47fc-a747-8e0169bacea1", 2);
+        o.getOrderItems().put("5268203c-de76-4921-a3e3-439db69c462a", 1);
+        o.setAddress("Group T");
         
-        return EntityModel.of(o);
+        return orderToEntityModel(o);
     }
 
     private EntityModel<Meal> mealToEntityModel(String id, Meal meal) {
@@ -96,6 +97,13 @@ public class MealsRestController {
 
     private EntityModel<OrderConfirmation> orderConfirmationToEntityModel(OrderConfirmation confirmation) {
         return EntityModel.of(confirmation);
+    }
+
+    private EntityModel<Order> orderToEntityModel(Order order) {
+        Links links = order.getOrderItems().keySet().stream().map(
+                id -> linkTo(methodOn(MealsRestController.class).getMealById(id)).withSelfRel()
+        ).collect(Links.collector());
+        return EntityModel.of(order, links);
     }
 
 }

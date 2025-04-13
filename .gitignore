@@ -4,3 +4,6 @@ startcode/
 *.zip
 bin/
 out/
+target/
+venv/
+*.pyc

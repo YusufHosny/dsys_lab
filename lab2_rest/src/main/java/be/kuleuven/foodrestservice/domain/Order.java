@@ -1,11 +1,17 @@
 package be.kuleuven.foodrestservice.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Order {
 
     private String address;
     private Map<String, Integer> orderItems;
+
+    public Order() {
+        address = "";
+        orderItems = new HashMap<>();
+    }
 
 
     public String getAddress() {
