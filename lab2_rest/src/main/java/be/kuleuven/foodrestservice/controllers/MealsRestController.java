@@ -35,6 +35,34 @@ public class MealsRestController {
         return mealToEntityModel(id, meal);
     }
 
+    @PutMapping("/rest/meals/{id}")
+    EntityModel<Meal> updateMealById(@PathVariable String id, Meal meal) {
+        mealsRepository.deleteMeal(id);
+        mealsRepository.addMeal(id, meal);
+
+        return mealToEntityModel(id, meal);
+    }
+    @PostMapping(value = "/rest/meals/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    EntityModel<Meal> addMealById(@PathVariable String id, @RequestBody Meal meal) {
+        meal.setId(id);
+        mealsRepository.addMeal(id, meal);
+
+        return mealToEntityModel(id, meal);
+    }
+
+    @PostMapping(value = "/rest/meals", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    EntityModel<Meal> addMeal(@RequestBody Meal meal) {
+        meal.setId(String.valueOf(UUID.randomUUID()));
+        mealsRepository.addMeal(meal.getId(), meal);
+
+        return mealToEntityModel(meal.getId(), meal);
+    }
+
+    @DeleteMapping("/rest/meals/{id}")
+    void deleteMealById(@PathVariable String id) {
+        mealsRepository.deleteMeal(id);
+    }
+
     @GetMapping("/rest/meals")
     CollectionModel<EntityModel<Meal>> getMeals() {
         Collection<Meal> meals = mealsRepository.getAllMeal();
@@ -62,17 +90,7 @@ public class MealsRestController {
         return mealToEntityModel(meal.getId(), meal);
     }
 
-    @PostMapping("/rest/addmeal")
-    void addMeal(Meal meal) {
-        mealsRepository.addMeal(meal.getId(), meal);
-    }
-
-    @GetMapping("/rest/deletemeal/{id}")
-    void deleteMeal(@PathVariable String id) {
-        mealsRepository.deleteMeal(id);
-    }
-
-    @PostMapping(value = "/rest/addorder", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/rest/order", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     EntityModel<OrderConfirmation> addOrder(@RequestBody Order order) {
         OrderConfirmation confirmation = mealsRepository.addOrder(order).orElseThrow(OrderFailedException::new);
 

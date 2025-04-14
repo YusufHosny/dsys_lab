@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -v localhost:8080/rest/addorder -H 'Content-type:application/json' \
+curl -v localhost:8080/rest/order -H 'Content-type:application/json' \
   --data '{
     "address": "Brazil",
     "orderItems": {

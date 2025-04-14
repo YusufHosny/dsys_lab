@@ -3,7 +3,7 @@ import os
 import requests
 import time
 
-PORT = 13372
+PORT = 1337
 
 
 def test_soap(url: str):

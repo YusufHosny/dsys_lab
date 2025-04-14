@@ -5,7 +5,7 @@ import time
 def test_rmi(host: str):
     start = time.perf_counter_ns()
     try:
-        subprocess.run(["./rmi", host], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        subprocess.run(['./rmi/runclient.sh', host], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
         success = True
     except subprocess.CalledProcessError:
         success = False
