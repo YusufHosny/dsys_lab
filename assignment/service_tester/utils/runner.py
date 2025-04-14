@@ -11,11 +11,10 @@ def run_test(func, args, clients: int, req_per_sec: int, result_file: str):
         results.append((elapsed, success))
 
     futures = []
-    executors = [concurrent.futures.ThreadPoolExecutor() for _ in range(clients)]
-    for _ in range(60):
+    executors = [concurrent.futures.ThreadPoolExecutor(max_workers=req_per_sec*2) for _ in range(clients)]
+    for _ in range(10):
         for executor in executors:
-            with executor:
-                futures += [executor.submit(wrapper) for _ in range(req_per_sec)]
+            futures += [executor.submit(wrapper) for _ in range(req_per_sec)]
         time.sleep(1)
     concurrent.futures.wait(futures)
 

@@ -13,7 +13,7 @@ def main(args):
     }
 
     run_test(testers[args.type],
-             args.url,
+             (args.url,),
              args.clients,
              args.rps,
              args.outfile
@@ -22,10 +22,10 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('clients', help='number of parallel clients to launch')
-    parser.add_argument('rps', help='requests per second')
-    parser.add_argument('type', help='which service to hit (rmi, soap, rest, restrpc)')
-    parser.add_argument('url', help='url of vm to hit')
-    parser.add_argument('--outfile', '-o', help='file to put results in')
+    parser.add_argument('clients', help='number of parallel clients to launch', type=int)
+    parser.add_argument('rps', help='requests per second', type=int)
+    parser.add_argument('type', help='which service to hit (rmi, soap, rest, restrpc)', type=str)
+    parser.add_argument('url', help='url of vm to hit', type=str)
+    parser.add_argument('--outfile', '-o', help='file to put results in', type=str)
     args = parser.parse_args()
     main(args)

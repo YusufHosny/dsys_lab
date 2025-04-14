@@ -28,6 +28,7 @@ def test_rest(url: str):
                 response = requests.post(url + 'rest/' + path, json=data[path], headers=headers)
             else:
                 response = requests.get(url + 'rest/' + path, headers=headers)
+        print(response)
         return time.perf_counter_ns() - start, response.status_code == 200
     except requests.RequestException:
         return time.perf_counter_ns() - start, False
