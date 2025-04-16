@@ -2,11 +2,13 @@ import os
 
 import requests
 import time
+from urllib.parse import urlunparse
 
 PORT = 1337
 
 
 def test_soap(url: str):
+    url = urlunparse(('http', f'{url}:{PORT}', 'soap/ws/', '', '', ''))
     headers = {'Content-Type': 'text/xml'}
 
     payloads = []

@@ -35,8 +35,8 @@ public class MealsRestController {
         return mealToEntityModel(id, meal);
     }
 
-    @PutMapping("/rest/meals/{id}")
-    EntityModel<Meal> updateMealById(@PathVariable String id, Meal meal) {
+    @PutMapping(value = "/rest/meals/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    EntityModel<Meal> updateMealById(@PathVariable String id, @RequestBody Meal meal) {
         mealsRepository.deleteMeal(id);
         mealsRepository.addMeal(id, meal);
 
