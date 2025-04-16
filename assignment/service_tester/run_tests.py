@@ -16,6 +16,7 @@ def main(args):
              (args.url,),
              args.clients,
              args.rps,
+             args.length,
              args.outfile
              )
 
@@ -24,6 +25,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('clients', help='number of parallel clients to launch', type=int)
     parser.add_argument('rps', help='requests per second', type=int)
+    parser.add_argument('length', help='time in seconds to run tests for', type=int)
     parser.add_argument('type', help='which service to hit (rmi, soap, rest, restrpc)', type=str)
     parser.add_argument('url', help='url of vm to hit', type=str)
     parser.add_argument('--outfile', '-o', help='file to put results in', type=str)

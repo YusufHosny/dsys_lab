@@ -10,7 +10,7 @@ import hotel.BookingDetail;
 import hotel.BookingManager;
 import hotel.IBookingManager;
 
-public class BookingClient extends AbstractScriptedSimpleTest {
+public class BookingClient extends AbstractScriptedStressTest {
 
 	private IBookingManager bm = null;
 

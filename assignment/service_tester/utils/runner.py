@@ -3,7 +3,7 @@ import concurrent.futures
 import csv
 
 
-def run_test(func, args, clients: int, req_per_sec: int, result_file: str):
+def run_test(func, args, clients: int, req_per_sec: int, length: int, result_file: str):
     results = []
 
     def wrapper():
@@ -12,7 +12,7 @@ def run_test(func, args, clients: int, req_per_sec: int, result_file: str):
 
     futures = []
     executors = [concurrent.futures.ThreadPoolExecutor(max_workers=req_per_sec*2) for _ in range(clients)]
-    for _ in range(10):
+    for _ in range(length):
         for executor in executors:
             futures += [executor.submit(wrapper) for _ in range(req_per_sec)]
         time.sleep(1)
