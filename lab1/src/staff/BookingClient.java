@@ -14,9 +14,10 @@ public class BookingClient extends AbstractScriptedStressTest {
 
 	private IBookingManager bm = null;
 
+	// arg 0: hostname
 	public static void main(String[] args) throws Exception {
-		BookingClient client = new BookingClient(args[2]);
-		client.run(Integer.parseInt(args[1]));
+		BookingClient client = new BookingClient(args[0]);
+		client.run();
 	}
 
 	/***************
@@ -24,7 +25,6 @@ public class BookingClient extends AbstractScriptedStressTest {
 	 ***************/
 	public BookingClient(String host) {
 		try {
-			Thread.sleep(1000);
 			bm = (IBookingManager) LocateRegistry.getRegistry(host, 1099).lookup("BookingManager");
 		} catch (Exception exp) {
 			exp.printStackTrace();
