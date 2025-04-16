@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 public class MealsRestRpcStyleController {
@@ -25,6 +26,7 @@ public class MealsRestRpcStyleController {
     }
 
     @GetMapping("/restrpc/meals/{id}")
+    @ResponseBody
     Meal getMealById(@PathVariable String id) {
         Optional<Meal> meal = mealsRepository.findMeal(id);
 
@@ -32,11 +34,13 @@ public class MealsRestRpcStyleController {
     }
 
     @GetMapping("/restrpc/meals")
+    @ResponseBody
     Collection<Meal> getMeals() {
         return mealsRepository.getAllMeal();
     }
 
     @PutMapping(value = "/restrpc/meals/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     Meal updateMealById(@PathVariable String id, @RequestBody Meal meal) {
         mealsRepository.deleteMeal(id);
         mealsRepository.addMeal(id, meal);
@@ -45,16 +49,21 @@ public class MealsRestRpcStyleController {
     }
 
     @PostMapping(value = "/restrpc/meals", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    void addMeal(@RequestBody Meal meal) {
+    @ResponseBody
+    Meal addMeal(@RequestBody Meal meal) {
+        meal.setId(String.valueOf(UUID.randomUUID()));
         mealsRepository.addMeal(meal.getId(), meal);
+
+        return meal;
     }
 
-    @DeleteMapping("/restrpc/meal/{id}")
+    @DeleteMapping("/restrpc/meals/{id}")
     void deleteMeal(@PathVariable String id) {
         mealsRepository.deleteMeal(id);
     }
 
     @GetMapping("/restrpc/cheapestmeal")
+    @ResponseBody
     Meal getCheapestMeal() {
         Optional<Meal> meal = mealsRepository.findCheapestMeal();
 
@@ -62,6 +71,7 @@ public class MealsRestRpcStyleController {
     }
 
     @GetMapping("/restrpc/largestmeal")
+    @ResponseBody
     Meal getLargestMeal() {
         Optional<Meal> meal = mealsRepository.findCheapestMeal();
 
@@ -69,6 +79,7 @@ public class MealsRestRpcStyleController {
     }
 
     @PostMapping(value = "/restrpc/order", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     OrderConfirmation addOrder(@RequestBody Order order) {
         OrderConfirmation confirmation = mealsRepository.addOrder(order).orElseThrow(OrderFailedException::new);;
 
@@ -76,6 +87,7 @@ public class MealsRestRpcStyleController {
     }
 
     @GetMapping("/restrpc/sampleorder")
+    @ResponseBody
     Order getSampleOrder() {
         Order o = new Order();
         o.getOrderItems().put("4237681a-441f-47fc-a747-8e0169bacea1", 2);
