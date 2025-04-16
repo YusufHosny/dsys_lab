@@ -5,6 +5,7 @@ ant init
 ant compile
 
 # package client jar and move to /assignment/rmi
+rm bin/MANIFEST.MF
 printf "Manifest-Version: 1.0\nMain-Class: staff.BookingClient\n" >> bin/MANIFEST.MF
 (cd bin && jar cfm Client.jar MANIFEST.MF hotel/ staff/)
 rm "../assignment/service_tester/rmi/Client.jar"

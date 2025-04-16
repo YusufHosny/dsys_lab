@@ -10,7 +10,7 @@ import hotel.BookingDetail;
 import hotel.BookingManager;
 import hotel.IBookingManager;
 
-public class BookingClient extends AbstractScriptedStressTest {
+public class BookingClient extends AbstractScriptedSimpleTest {
 
 	private IBookingManager bm = null;
 
@@ -25,7 +25,7 @@ public class BookingClient extends AbstractScriptedStressTest {
 	 ***************/
 	public BookingClient(String host) {
 		try {
-			bm = (IBookingManager) LocateRegistry.getRegistry(host, 1099).lookup("BookingManager");
+			bm = (IBookingManager) LocateRegistry.getRegistry(host).lookup("BookingManager");
 		} catch (Exception exp) {
 			exp.printStackTrace();
 		}

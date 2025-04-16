@@ -33,7 +33,7 @@ public class BookingServer {
 
     public void run() {
         try {
-            IBookingManager stub = (IBookingManager) UnicastRemoteObject.exportObject(bm, 0);
+            IBookingManager stub = (IBookingManager) UnicastRemoteObject.exportObject(bm, 13370);
             LocateRegistry.getRegistry().bind("BookingManager", stub);
         } catch (Exception exp) {
             exp.printStackTrace();
