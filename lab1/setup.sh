@@ -12,6 +12,7 @@ rm "../assignment/service_tester/rmi/Client.jar"
 cp -v bin/Client.jar "../assignment/service_tester/rmi/"
 
 # copy run client script to assignment/rmi
+rm "../assignment/service_tester/rmi/runclient.sh"
 cp -v runclient.sh "../assignment/service_tester/rmi/"
 
 # package server jar and move to /home/server
